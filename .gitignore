@@ -216,3 +216,22 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Custom virtual environments
+**/dl_env/
+**/DL_gpu_env/
+
+# PyCharm
+**/.idea/
+
+# VS Code
+.vscode/
+
+# Keras Tuner
+**/mydir/
+**/untitled_project/
+
+# TensorFlow checkpoints
+checkpoint
+*.index
+*.data-00000-of-00001
