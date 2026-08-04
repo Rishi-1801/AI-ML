@@ -220,6 +220,8 @@ __marimo__/
 # Custom virtual environments
 **/dl_env/
 **/DL_gpu_env/
+**/torch_gpu/
+
 
 # PyCharm
 **/.idea/
