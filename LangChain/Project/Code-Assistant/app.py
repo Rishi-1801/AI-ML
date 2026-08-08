@@ -1,0 +1,37 @@
+# modelfile is used to create a new model by using the existing models in ollama by setting their own params or adding specific info
+import requests
+import json
+import gradio as gr
+
+url="http://localhost:11434/api/generate"
+
+headers={
+    "Content-Type":"application/json"
+}
+history=[]
+def generate_response(prompt):
+    history.append(prompt)
+    final_prompt="\n".join(history)
+    data={
+        "model":"CodeGuru",
+        "prompt":final_prompt,
+        "stream":False       #---> Avoiding unneccesary info and getting only answer
+    }
+
+    response=requests.post(url=url,headers=headers,data=json.dumps(data)) # hitting the model by api
+
+    if response.status_code==200:
+        response=response.text
+        data=json.loads(response)
+        actual_response=data['response']
+        return actual_response
+    else:
+        print("error:",response.text)
+
+#Creating Front end by Gradio
+interface=gr.Interface(
+    fn=generate_response,
+    inputs=gr.Textbox(lines=4,placeholder="Enter your Prompt"),
+    outputs="text"
+)
+interface.launch()
